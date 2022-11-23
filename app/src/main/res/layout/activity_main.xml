@@ -4,35 +4,203 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg3"
         tools:context=".MainActivity">
 
-    <androidx.gridlayout.widget.GridLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:padding="20dp"
-            app:columnCount="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/fyplogo2"
+            android:id="@+id/app_logo"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:orientation="vertical">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="2dp"
+            android:layout_marginTop="50dp" />
 
-        <Button
-                android:text="Obstacle Avoidance"
-                app:layout_row="0"
-                app:layout_column="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:id="@+id/oaButton" />
+    <TextView
+            android:id="@+id/app_name_tv"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:text="@string/app_names"
+            app:layout_constraintTop_toBottomOf="@id/app_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:fontFamily="@font/noto_sans_tc_bold"
+            />
 
-        <Button
-                android:text="Elevator"
-                app:layout_row="1"
-                app:layout_column="0"
-                app:layout_columnWeight="1"
-                app:layout_rowWeight="1"
-                android:id="@+id/eButton" />
+    <Button
+            android:id="@+id/connect_btn"
+            android:layout_marginTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="開始連接"
+            android:fontFamily="@font/noto_sans_tc_medium"
+            android:textSize="15dp"
+            android:paddingVertical="0dp"
+            android:backgroundTint="@color/green_900"
+            app:cornerRadius="15dp"
+            android:visibility="visible"
+            android:paddingHorizontal="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deviceList"
+            app:layout_constraintEnd_toEndOf="@+id/deviceList"
+            app:layout_constraintStart_toStartOf="@+id/deviceList" />
 
-    </androidx.gridlayout.widget.GridLayout>
+    <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:id="@+id/disconnect_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="中斷連接"
+            android:fontFamily="@font/noto_sans_tc_medium"
+            android:visibility="invisible"
+            app:strokeColor="@color/red_300"
+            android:textColor="@color/red_300"
+            android:textSize="15dp"
+            android:paddingVertical="0dp"
+            app:cornerRadius="15dp"
+            android:paddingHorizontal="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/connect_btn"
+            app:layout_constraintEnd_toEndOf="@+id/deviceList"
+            app:layout_constraintStart_toStartOf="@+id/deviceList" />
+
+    <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:orientation="vertical"
+            android:id="@+id/deviceList"
+            android:elevation="2dp"
+            android:background="@drawable/cornerbg"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="280dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="附近的裝置"
+                android:textColor="@color/green_700"
+                android:fontFamily="@font/noto_sans_tc_bold" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/green_100"
+                android:layout_marginVertical="2dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deviceItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="5dp"
+                android:background="@color/white">
+
+            <ImageView
+                    android:id="@+id/deviceIcon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/noun_raspberry_green"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                    android:layout_marginHorizontal="10dp"
+                    android:text="raspberrypi 1"
+                    android:textColor="@color/black_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deviceText"
+                    app:layout_constraintLeft_toRightOf="@id/deviceIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:fontFamily="@font/noto_sans_tc_medium" />
+
+            <ImageView
+                    android:id="@+id/deviceV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/noun_v_icon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deviceItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="5dp"
+                android:background="@color/white">
+
+            <ImageView
+                    android:id="@+id/deviceIcon1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/noun_raspberry_green"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                    android:layout_marginHorizontal="10dp"
+                    android:text="raspberrypi 2"
+                    android:textColor="@color/black_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deviceText1"
+                    app:layout_constraintLeft_toRightOf="@id/deviceIcon1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:fontFamily="@font/noto_sans_tc_medium" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deviceItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="5dp"
+                android:background="@color/white">
+
+            <ImageView
+                    android:id="@+id/deviceIcon3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/noun_raspberry_green"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                    android:layout_marginHorizontal="10dp"
+                    android:text="raspberrypi 3"
+                    android:textColor="@color/black_100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deviceText3"
+                    app:layout_constraintLeft_toRightOf="@id/deviceIcon3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:fontFamily="@font/noto_sans_tc_medium" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
