@@ -3,7 +3,6 @@ package com.example.examplebluetooth
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
-import android.os.PersistableBundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.GestureDetector

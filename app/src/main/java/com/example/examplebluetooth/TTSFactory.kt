@@ -3,13 +3,12 @@ package com.example.examplebluetooth
 import android.content.Context
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.widget.Toast
 import java.util.*
 
 class TTSFactory {
     companion object {
         fun createTTS(contxt: Context): TextToSpeech {
-            lateinit var tts: TextToSpeech;
+            lateinit var tts: TextToSpeech
             tts = TextToSpeech(contxt) {
                 if (it == TextToSpeech.SUCCESS) {
                     val result = tts.setLanguage(Locale("zh", "hk"))

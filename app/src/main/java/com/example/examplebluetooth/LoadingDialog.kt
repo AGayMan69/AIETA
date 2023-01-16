@@ -3,21 +3,19 @@ package com.example.examplebluetooth
 import android.animation.Animator
 import android.app.Activity
 import android.content.Context
-import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.airbnb.lottie.Lottie
 import com.airbnb.lottie.LottieAnimationView
 
 class LoadingDialog(mActivity: Activity, val mContext: Context) :
     FloatingDialog(mActivity, R.layout.loading_dialog) {
-    private lateinit var loadingTV: TextView
-    private lateinit var loadingLottie: LottieAnimationView
-    private lateinit var checkLottie: LottieAnimationView
-    private lateinit var failLottie: LottieAnimationView
+    private var loadingTV: TextView
+    private var loadingLottie: LottieAnimationView
+    private var checkLottie: LottieAnimationView
+    private var failLottie: LottieAnimationView
 
     init {
         loadingTV = mView.findViewById(R.id.dialog_text)

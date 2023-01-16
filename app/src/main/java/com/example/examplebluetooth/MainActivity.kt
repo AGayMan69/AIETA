@@ -1,27 +1,20 @@
 package com.example.examplebluetooth
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothSocket
 import android.content.*
-import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.content.ContextCompat
 import com.example.examplebluetooth.BluetoothService.Companion.CONNECT_FILTER
 import com.example.examplebluetooth.databinding.ActivityMainBinding
@@ -304,6 +297,7 @@ class MainActivity : AppCompatActivity() {
                 mBound = false
                 Log.i(BluetoothService.TAG, "Main: Unbind")
             }
+            mtts.speak("中斷連接", TextToSpeech.QUEUE_FLUSH, null, null)
         } else {
             RequestObject("stop").also {
                 mService.switchServiceMode(it)
@@ -326,11 +320,18 @@ class MainActivity : AppCompatActivity() {
             if (intent.action.equals(CONNECT_FILTER)) {
                 intent.getStringExtra("connection")?.also { intentString ->
                     when (intentString) {
-                        "loading" -> showLoadingDialog()
-                        "failed" -> showFailDialog()
+                        "loading" -> {
+                            mtts.speak("連線中", TextToSpeech.QUEUE_FLUSH, null, null)
+                            showLoadingDialog()
+                        }
+                        "failed" -> {
+                            showFailDialog()
+                            mtts.speak("連線失敗!", TextToSpeech.QUEUE_FLUSH, null, null)
+                        }
                         "successful" -> {
                             mConnect = true
                             showSuccessDialog()
+                            mtts.speak("連線成功!", TextToSpeech.QUEUE_FLUSH, null, null)
                             Intent(context, BluetoothService::class.java).also {
                                 bindService(it, connection, Context.BIND_AUTO_CREATE)
                             }
@@ -343,6 +344,7 @@ class MainActivity : AppCompatActivity() {
                                 mBound = false
                                 Log.i(BluetoothService.TAG, "Main: Unbind")
                             }
+                            mtts.speak("中斷連接", TextToSpeech.QUEUE_FLUSH, null, null)
                         }
                         else -> return
                     }

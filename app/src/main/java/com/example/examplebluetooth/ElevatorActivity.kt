@@ -1,7 +1,6 @@
 package com.example.examplebluetooth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -15,6 +14,7 @@ class ElevatorActivity : ServiceActivity() {
         binding = ActivityElevatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         serviceName = "Elevator"
+        binding.lottieDownDirection.rotation = 180f
         mDetector = GestureDetector(this, SwipeListener(::swipeLeft, ::swipeRight))
     }
 
@@ -26,6 +26,14 @@ class ElevatorActivity : ServiceActivity() {
         if (it =="elevator direction") {
             mtts.speak(command, TextToSpeech.QUEUE_FLUSH, null, null)
             binding.commandTv.text = command
+            when (command) {
+                "電梯向上" ->
+                    binding.lottieUpDirection.playAnimation()
+                "電梯向下" ->
+                    binding.lottieDownDirection.playAnimation()
+                "電梯靜止" ->
+                    binding.lottieStop.playAnimation()
+            }
         } else if (it == "switch mode") {
             if (command == "電梯模式") {
                 Log.i("TTSSpeech", "switch mode: Elevator")

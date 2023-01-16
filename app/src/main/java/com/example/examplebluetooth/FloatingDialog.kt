@@ -6,7 +6,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
 
-abstract class FloatingDialog constructor(protected val mActivity: Activity, protected val mLayout: Int){
+abstract class FloatingDialog constructor(private val mActivity: Activity, private val mLayout: Int){
     protected var mAlertDialog: AlertDialog
     protected var mView : View
 

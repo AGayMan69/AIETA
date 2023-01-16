@@ -91,7 +91,7 @@ class BluetoothService : Service() {
                         msg.target = mReceiveHandlder
                         msg.sendToTarget()
                         Log.i(TAG, "Bluetooth disconnected")
-                        break;
+                        break
                     }
                 }
             }

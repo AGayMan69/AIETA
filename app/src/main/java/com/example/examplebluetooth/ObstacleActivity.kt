@@ -1,14 +1,10 @@
 package com.example.examplebluetooth
 
 import android.content.*
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.IBinder
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.GestureDetector
-import com.example.examplebluetooth.BluetoothService.Companion.CONNECT_FILTER
-import com.example.examplebluetooth.BluetoothService.Companion.RECEIVE_FILTER
 import com.example.examplebluetooth.databinding.ActivityObstacleBinding
 
 class ObstacleActivity : ServiceActivity() {
@@ -54,7 +50,7 @@ class ObstacleActivity : ServiceActivity() {
         mService.switchServiceMode(RequestObject("obstacle"))
     }
 
-//    override fun onDestroy() {
+    //    override fun onDestroy() {
 //        super.onDestroy()
 //        unbindService(connection)
 //        mBound = false
@@ -116,6 +112,10 @@ class ObstacleActivity : ServiceActivity() {
         if (it == "obstacle detection") {
             mtts.speak(command, TextToSpeech.QUEUE_FLUSH, null, null)
             binding.commandTv.text = command
+            when (command) {
+                "前方不便前行" -> binding.lottieStop.playAnimation()
+                else -> binding.lottieExplosion.playAnimation()
+            }
             // ui shit
         } else if (it == "switch mode") {
             if (command == "障礙物模式") {
